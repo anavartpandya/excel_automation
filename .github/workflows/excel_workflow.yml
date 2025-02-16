@@ -1,1 +1,32 @@
+name: Excel Operations
+
+on: 
+  workflow_dispatch:  # Allows manual trigger from GitHub Actions UI
+
+jobs:
+  run_excel_script:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install Dependencies
+        run: pip install pandas openpyxl
+
+      - name: Run Excel Script
+        run: python excel_operations.py
+      
+      - name: Commit & Push Changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add output.xlsx
+          git commit -m "Updated output.xlsx from GitHub Actions"
+          git push
 
