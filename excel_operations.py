@@ -1,7 +1,7 @@
 import pandas as pd
 
 # File paths
-input_file = "data.xlsx"   # Ensure this file exists in your repo
+input_file = "Lab Assay Values (H 003 and 006).xlsx"   # Ensure this file exists in your repo
 output_file = "output.xlsx"
 
 def read_excel(file_path):
