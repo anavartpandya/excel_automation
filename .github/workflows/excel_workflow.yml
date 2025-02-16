@@ -29,6 +29,7 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/anavartpandya/excel_automation.git
           git add output.xlsx
           git commit -m "Updated output.xlsx from GitHub Actions" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/anavartpandya/excel_automation.git main
+          git push origin main
