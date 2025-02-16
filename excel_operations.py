@@ -1,28 +1,29 @@
 import pandas as pd
 
-# Function to read data from Excel
+# File paths
+input_file = "data.xlsx"   # Ensure this file exists in your repo
+output_file = "output.xlsx"
+
 def read_excel(file_path):
-    df = pd.read_excel(file_path)
-    print("Excel Data:")
-    print(df)
-    return df
+    try:
+        df = pd.read_excel(file_path, engine='openpyxl')  # Specify engine
+        print("Excel Data Read Successfully:")
+        print(df)
+        return df
+    except Exception as e:
+        print(f"Error reading Excel file: {e}")
+        return None
 
-# Function to write data to Excel
 def write_excel(file_path, data):
-    df = pd.DataFrame(data)
-    df.to_excel(file_path, index=False)
-    print(f"Data written to {file_path}")
+    try:
+        df = pd.DataFrame(data)
+        df.to_excel(file_path, index=False, engine='openpyxl')  # Specify engine
+        print(f"Data written to {file_path}")
+    except Exception as e:
+        print(f"Error writing Excel file: {e}")
 
-# Example usage
 if __name__ == "__main__":
-    file_name = "data.xlsx"  # Your Excel file in the repo
-    new_file = "output.xlsx"  # New file to be written
-    
-    # Read from Excel
-    df = read_excel(file_name)
-    
-    # Modify data (example: adding a new column)
-    df["NewColumn"] = "TestValue"
-    
-    # Write back to a new Excel file
-    write_excel(new_file, df)
+    df = read_excel(input_file)
+    if df is not None:
+        df["NewColumn"] = "TestValue"  # Modify data
+        write_excel(output_file, df)
